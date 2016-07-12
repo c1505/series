@@ -1,23 +1,24 @@
 class Series
-  def initialize(str)
-    @str = str
+  def initialize(series)
+    @series = series
   end
   
-  def slices(num)
-    arr = @str.split("").map do |f|
+  def slices(length)
+    raise ArgumentError if length > @series.length
+    arr = @series.split("").map do |f|
       f.to_i
     end
-    if num > arr.length
-      raise ArgumentError
-    end
+    
     start = 0
-    new_num = num - 1
+    slice_end = length - 1
     new_arr = []
-    while new_num < arr.length do 
-      new_arr << arr[start..new_num]
+    
+    while slice_end < arr.length do 
+      new_arr << arr[start..slice_end]
       start += 1
-      new_num += 1
+      slice_end += 1
     end
+    
     new_arr
   end
 end 
